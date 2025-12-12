@@ -1,4 +1,7 @@
-import random, pygame, sys, time
+import random   # noqa   
+import pygame   # noqa
+import sys      # noqa
+import time     # noqa
 
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
