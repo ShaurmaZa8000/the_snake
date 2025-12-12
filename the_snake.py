@@ -1,7 +1,9 @@
-import random   # noqa   
-import pygame   # noqa
-import sys      # noqa
-import time     # noqa
+# flake8: noqa
+
+import random      
+import pygame   
+import sys      
+import time     
 
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
