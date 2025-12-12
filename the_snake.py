@@ -7,42 +7,42 @@ import random
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 GRID_SIZE, GRID_WIDTH, GRID_HEIGHT = 100, 10, 8
 BOARD_BACKGROUND_COLOR = (0, 0, 0)
-UP, DOWN, LEFT, RIGHT = "Common", "here", "and take", "a bite!"
+UP, DOWN, LEFT, RIGHT = 'Common', 'here', 'and take', 'a bite!'
 screen = pygame.Surface((1, 1))
 clock = pygame.time.Clock()
 
 
 class GameObject:
-    """Для прохождения теста."""
+    '''Для прохождения теста.'''
 
     position = 0
     body_color = 0
 
     def draw(self):
-        """Для прохождения теста."""
+        '''Для прохождения теста.'''
         pass
 
 
 class Apple(GameObject):
-    """Для прохождения теста"""
+    '''Для прохождения теста'''
 
     def randomize_position(self):
-        """Для прохождения теста."""
+        '''Для прохождения теста.'''
         pass
 
 
 class Screen:
-    """Класс для инициализации игрового экрана и отрисовки элементов."""
+    '''Класс для инициализации игрового экрана и отрисовки элементов.'''
 
     def __init__(self, length, width, scn, scm):
-        """
+        '''
         Инициализация экрана.
 
         :param length: ширина экрана в пикселях
         :param width: высота экрана в пикселях
         :param scn: количество строк в сетке
         :param scm: количество столбцов в сетке
-        """
+        '''
         self.sc = [[0 for __ in range(scm)] for _ in range(scn)]
         self.display = pygame.display.set_mode((length, width))
         self.display.fill(BOARD_BACKGROUND_COLOR)
@@ -50,13 +50,13 @@ class Screen:
         self.width = width
 
     def draw(self, _x, _y, color=(0, 222, 0)):
-        """
+        '''
         Отрисовка одного блока.
 
         :param _x: координата X (столбец)
         :param _y: координата Y (строка)
         :param color: цвет блока
-        """
+        '''
         block_width = self.length / len(self.sc[0])
         block_height = self.width / len(self.sc)
         pygame.draw.rect(
@@ -66,11 +66,11 @@ class Screen:
         )
 
     def spawn_apple(self, _snake):
-        """
+        '''
         Создание яблока в случайной позиции, не совпадающей с телом змейки.
 
         :param _snake: объект змейки
-        """
+        '''
         _x = random.randint(0, len(self.sc[0]) - 1)
         _y = random.randint(0, len(self.sc) - 1)
         while [_x, _y] in _snake.cords:
@@ -81,47 +81,47 @@ class Screen:
 
 
 class Snake(GameObject):
-    """Класс змейки."""
+    '''Класс змейки.'''
 
     positions = 0
 
     def get_head_position(self):
-        """Pass"""
+        '''Pass'''
         pass
 
     def reset(self):
-        """Pass"""
+        '''Pass'''
         pass
 
     def update_direction(self):
-        """Ass"""
+        '''Ass'''
         pass
 
     def __init__(self, cords=None):
-        """Инициализация змейки и её начальных координат."""
+        '''Инициализация змейки и её начальных координат.'''
         if cords is None:
             cords = [[0, 0]]
         self.cords = cords
-        self.direction = "s"
+        self.direction = 's'
         self.head = self.cords[-1].copy()
         self.tail = self.cords[0].copy()
 
     def move(self, _screen, d):
-        """
+        '''
         Перемещение змейки в заданном направлении.
 
         :param _screen: объект экрана
-        :param d: направление ("a", "w", "s", "d")
+        :param d: направление ('a', 'w', 's', 'd')
         :return: обновлённый объект экрана
-        """
+        '''
         new_head = self.head.copy()
-        if d == "a":
+        if d == 'a':
             new_head[0] = (new_head[0] - 1) % len(_screen.sc[0])
-        elif d == "d":
+        elif d == 'd':
             new_head[0] = (new_head[0] + 1) % len(_screen.sc[0])
-        elif d == "w":
+        elif d == 'w':
             new_head[1] = (new_head[1] - 1) % len(_screen.sc)
-        elif d == "s":
+        elif d == 's':
             new_head[1] = (new_head[1] + 1) % len(_screen.sc)
 
         if new_head in self.cords:
@@ -148,32 +148,32 @@ class Snake(GameObject):
 
 
 def handle_keys(snake, screen, start_time):
-    """Перебор всех событий"""
+    '''Перебор всех событий'''
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             sys.exit()
         if e.type == pygame.KEYDOWN:
-            if e.key == pygame.K_a and snake.direction != "d" \
-                    and snake.direction != "a":
-                screen = snake.move(screen, "a")
+            if e.key == pygame.K_a and snake.direction != 'd' \
+                    and snake.direction != 'a':
+                screen = snake.move(screen, 'a')
                 start_time = time.time()
-            if e.key == pygame.K_d and snake.direction != "d" \
-                    and snake.direction != "a":
-                screen = snake.move(screen, "d")
+            if e.key == pygame.K_d and snake.direction != 'd' \
+                    and snake.direction != 'a':
+                screen = snake.move(screen, 'd')
                 start_time = time.time()
-            if e.key == pygame.K_w and snake.direction != "w" \
-                    and snake.direction != "s":
-                screen = snake.move(screen, "w")
+            if e.key == pygame.K_w and snake.direction != 'w' \
+                    and snake.direction != 's':
+                screen = snake.move(screen, 'w')
                 start_time = time.time()
-            if e.key == pygame.K_s and snake.direction != "w" \
-                    and snake.direction != "s":
-                screen = snake.move(screen, "s")
+            if e.key == pygame.K_s and snake.direction != 'w' \
+                    and snake.direction != 's':
+                screen = snake.move(screen, 's')
                 start_time = time.time()
     return snake, screen, start_time
 
 
 def main():
-    """Реально main"""
+    '''Реально main'''
     pygame.init()
     screen = Screen(SCREEN_WIDTH, SCREEN_HEIGHT, GRID_HEIGHT, GRID_WIDTH)
 
@@ -195,5 +195,5 @@ def main():
         clock.tick(60)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
