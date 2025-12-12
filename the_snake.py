@@ -1,7 +1,8 @@
 import random
-import pygame
 import sys
 import time
+
+import pygame
 
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
